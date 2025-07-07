@@ -120,6 +120,27 @@ Threads["BubblePlayerLeave"] = task.spawn(function()
         task.cancel(Threads["DB"..Player.Name])
     end)
 end)
+Threads["DeathHandler"] = task.spawn(function()
+    game.Workspace.Live.ChildRemoved:Connect(function(child)
+        if ActiveTarget.Name == child.name then ActiveTarget = nil end
+        if playerIsPlayer(child) and game.Players[child.Name] then
+            repeat wait() until game.Workspace.Live:FindFirstChild(child.Name)
+            Threads["DB"..child.Name] = task.spawn(function()
+                Player.ChildAdded:Connect(function(child)
+                    if child.Name == "Dashing" then
+                        repeat
+                            Look(Player)
+                            block()
+                            task.wait()
+                        until Character:FindFirstChild("hit"..game.Players[Player.Name].UserId) or not Player:FindFirstChild("Dashing")
+                        ActiveTarget = Player
+                        unblock()
+                    end
+                end)
+            end)
+        end
+    end)
+end)
 -------------------
 
 Threads["SideDashLock"] = task.spawn(function()
