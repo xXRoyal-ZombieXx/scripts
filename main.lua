@@ -164,6 +164,8 @@ Threads["Lock"] = task.spawn(function()
                     local closest = pInRange[1]
                     Look(closest.Player)
                 end
+            else
+                Look(ActiveTarget)
             end
         end
     end
