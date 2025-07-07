@@ -90,6 +90,7 @@ for _,Player in pairs(game.Workspace.Live:GetChildren()) do
                             block()
                             task.wait()
                         until Character:FindFirstChild("hit"..game.Players[Player.Name].UserId) or not Player:FindFirstChild("Dashing")
+                        ActiveTarget = Player
                         unblock()
                     end
                 end)
