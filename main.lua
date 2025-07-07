@@ -107,7 +107,7 @@ Threads["BubblePlayerJoin"] = task.spawn(function()
                         Look(Player.Character)
                         block()
                         task.wait()
-                    until Character:FindFirstChild("hit"..Player.UserId) or not Player.CharacterLFindFirstChild("Dashing")
+                    until Character:FindFirstChild("hit"..Player.UserId) or not Player.Character:FindFirstChild("Dashing")
                     unblock()
                 end
             end)
