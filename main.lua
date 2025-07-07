@@ -61,10 +61,12 @@ end
 
 --//Task Scheduling\\--
 
-while game:GetService('RunService').RenderStepped:Wait() do
-    UserSettings():GetService('UserGameSettings').RotationType =
-        Enum.RotationType.MovementRelative
-end
+Threads["CameraThingy"] = task.spawn(function()
+    while game:GetService('RunService').RenderStepped:Wait() do
+        UserSettings():GetService('UserGameSettings').RotationType =
+            Enum.RotationType.MovementRelative
+    end
+end)
 
 Threads["Active Target"] = task.spawn(function()
     Character.ChildAdded:Connect(function(child)
